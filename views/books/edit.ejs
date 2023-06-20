@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+
+<div class="container d-flex flex-column flex-md-row justify-content-center mt-5 col-md-5" id="holder">
+	<form class="col-md-8" action="/books/<%= book.id %>?_method=PUT" method="POST">
+
+		<div class="mb-2">
+			<label for="author" class="form-label">Author</label>
+			<input type="text" class="form-control" id="author" name="author" value="<%= book.author %>" autofocus onfocus="this.setSelectionRange(this.value.length, this.value.length)">
+		</div>
+
+		<div class="mb-2">
+			<label for="title" class="form-label">Title</label>
+			<input type="text" class="form-control" id="title" name="title" value="<%= book.title %>">
+		</div>
+
+		<div class="mb-2">
+			<label for="pages" class="form-label">Number of Pages</label>
+			<input type="number" class="form-control" id="pages" name="pages" value="<%= book.pages %>">
+		</div>
+
+		<div class="mb-2">
+			<label for="genre" class="form-label">Genre</label>
+			<input type="text" class="form-control" id="genre" name="genre" value="<%= book.genre %>">
+		</div>
+
+		<% if (errorMsg) { %>
+			<p>
+				<%= errorMsg %>	
+			</p>
+		<% } %>
+		<button type="submit" class="btn btn-primary">Add Book</button>
+	</form>
+
+</div>
+
+
+
+
+<%- include('../partials/footer') %>

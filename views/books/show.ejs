@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+<div class="justify-content-center d-flex">
+	<div class="my-5 col-md-5">
+		<div class="p-5 text-center bg-body-secondary rounded">
+			<div class="container py-5">
+				<h1 class="text-body-emphasis">
+					<%= book.title %>
+				</h1>
+				<p class="col-lg-8 mx-auto lead">
+					Author: <%= book.author %>
+				</p>
+				<p class="col-lg-8 mx-auto lead">
+					Pages: <%= book.pages %>
+				</p>
+				<p class="col-lg-8 mx-auto lead">
+					Genre: <%= book.genre %>
+				</p>
+				<div class="mt-5">
+					<a href="/books/<%= book.id %>/edit"><button class="btn btn-lg btn-primary" type="button">Edit</button></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%- include('../partials/footer') %>
