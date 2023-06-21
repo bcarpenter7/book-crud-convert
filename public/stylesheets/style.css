@@ -18,3 +18,7 @@ a {
   height: 4.5vmin;
   fill: rgb(34, 37, 41);
   }
+
+strong {
+	font-weight: 700;
+}

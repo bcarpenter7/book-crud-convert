@@ -34,6 +34,13 @@ function search(req, res) {
 }
 
 async function results(req, res){
+	if (!(req.body.title) && !(req.body.author)) {
+		const context = {
+			title: 'Search',
+			errorMsg: ''
+		}
+		res.render('books/search', context)
+	}
 	try {
 		let jsonRes;
 		const title = req.body.title;
@@ -59,7 +66,7 @@ async function results(req, res){
 		data.items.forEach(e => {
 
 			let genre = e.volumeInfo.categories ? e.volumeInfo.categories[0] : "book"
-			let dataImg = e.volumeInfo.imageLinks ? e.volumeInfo.imageLinks.thumbnail : "#"
+			let dataImg = e.volumeInfo.imageLinks ? e.volumeInfo.imageLinks.thumbnail : "https://cdn-icons-png.flaticon.com/512/51/51354.png"
 			let author = e.volumeInfo.authors ? e.volumeInfo.authors[0] : "Author not available"
 			let description = e.volumeInfo.description ? e.volumeInfo.description : "No description available"
 			let price = e.saleInfo.listPrice ? e.saleInfo.listPrice.amount : "Price not available"
