@@ -27,5 +27,9 @@ router.get('/new', bookCtrl.new)
 router.get('/:id', bookCtrl.show)
 
 
+// // Get one 
+// router.get('/search', bookCtrl.showSearch)
+
+
 
 module.exports = router;
