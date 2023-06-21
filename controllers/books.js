@@ -9,6 +9,7 @@ module.exports = {
     delete: deleteBook,
     edit,
     update: updateBook,
+	search,
 	showSearch
 }
 
@@ -22,6 +23,15 @@ async function index(req, res){
     }
     res.render('books/index', context)
 }
+
+function search(req, res) {
+	const context = {
+		title: 'Search',
+		errorMsg: ''
+	}
+	res.render('books/search', context)
+}
+
 
 async function showSearch(req, res){
 	try {
@@ -43,6 +53,8 @@ async function showSearch(req, res){
 	} catch (err) {
 		console.log(err);
         res.render('error', {
+			error: '',
+			message: '',
 			title: 'error',
 			errorMsg: "not working"
 		});

@@ -17,6 +17,9 @@ router.delete('/:id', bookCtrl.delete)
 // PUT (connected to EDIT, to actually change the information)
 router.put('/:id', bookCtrl.update)
 
+// GET new (gets you to books/new )
+router.get('/search', bookCtrl.search)
+
 // EDIT (gets you to books/edit)
 router.get('/:id/edit', bookCtrl.edit)
 

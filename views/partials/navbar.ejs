@@ -28,6 +28,10 @@
 				<li class="nav-item">
 					<a class="nav-link <%= title === 'New Book' ? 'active' : '' %>" href="/books/new">Add Book</a>
 				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link <%= title === 'Search' ? 'active' : '' %>" href="/books/search">Search</a>
+				</li>
 
 				<li class="nav-item">
 					<a class="nav-link <%= title === 'Books' ? 'active' : '' %>" href="/books">All Books</a>
@@ -36,8 +40,5 @@
 
 		</div>
 
-		<form id="searchForm" action="/books/search" method="POST">
-				<input type='text' placeholder="search" name="title" >
-		</form>
 	</div>
 </nav>
