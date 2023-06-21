@@ -9,7 +9,7 @@ module.exports = {
     delete: deleteBook,
     edit,
     update: updateBook,
-	
+	showSearch
 }
 
 
@@ -23,31 +23,32 @@ async function index(req, res){
     res.render('books/index', context)
 }
 
-// async function showSearch(req, res){
-// 	try {
-// 		const oneBook = await req
-// 		console.log(oneBook, "WILL IT WORK")
-// 		const jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${oneBook}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
-// 		const data = await jsonRes.json();
+async function showSearch(req, res){
+	try {
+		const oneBook = req.body.title;
+		const jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${oneBook}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
+		// const jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${oneBook.title}+inauthor:${author}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
+		const data = await jsonRes.json();
 		
-// 		const context = {
-// 			book: oneBook,
-// 			title: oneBook.title,
-// 			data: data.items[0],
-// 			dataImg: data.items[0].volumeInfo.imageLinks.thumbnail,
-// 			pages: data.items[0].volumeInfo.pageCount,
-// 			genre: data.items[0].volumeInfo.categories[0]
-// 		}
-// 		console.log(data.items[0], data.items[0].pageCount)
-// 		res.render('books/show', context)
-// 	} catch (err) {
-// 		console.log(err);
-//         res.render('error', {
-// 			title: 'error',
-// 			errorMsg: "not working"
-// 		});
-// 	}
-// }
+		const context = {
+			book: oneBook,
+			data: data.items[0],
+			title: data.items[0].volumeInfo.title,
+			author: data.items[0].volumeInfo.authors[0],
+			dataImg: data.items[0].volumeInfo.imageLinks.thumbnail,
+			pages: data.items[0].volumeInfo.pageCount,
+			genre: data.items[0].volumeInfo.categories[0]
+		}
+		// console.log(data.items[0], data.items[0].pageCount)
+		res.render('books/show', context)
+	} catch (err) {
+		console.log(err);
+        res.render('error', {
+			title: 'error',
+			errorMsg: "not working"
+		});
+	}
+}
 
 async function show(req, res){
 	try {

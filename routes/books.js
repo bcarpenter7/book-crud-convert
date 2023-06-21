@@ -8,6 +8,9 @@ const bookCtrl = require('../controllers/books')
 // POST create (connected to the new, to actually change it)
 router.post('/', bookCtrl.create)
 
+// // POST search
+router.post('/search', bookCtrl.showSearch)
+
 // DELETE
 router.delete('/:id', bookCtrl.delete)
 
@@ -27,8 +30,7 @@ router.get('/new', bookCtrl.new)
 router.get('/:id', bookCtrl.show)
 
 
-// // Get one 
-// router.get('/search', bookCtrl.showSearch)
+
 
 
 
