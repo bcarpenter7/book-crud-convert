@@ -1,0 +1,40 @@
+<%- include('../partials/header') %>
+<div class="justify-content-center d-flex">
+	<div class="my-5 col-md-5">
+		<div class="p-5 text-center bg-body-secondary rounded">
+			<div class="container py-5">
+				<h1 class="text-body-emphasis">
+					<%= title %>
+				</h1>
+				<img width="150vmin" height="200vmin" src="<%= dataImg %>">
+				<p class="col-lg-8 mx-auto lead">
+					Author: <%= author %>
+				</p>
+				<p class="col-lg-8 mx-auto lead">
+					<% if(pages){ %>
+					Pages: <%= pages %>
+
+					<% } else { %>
+					Pages: <%= pages %>
+					<% } %>
+				</p>
+				<p class="col-lg-8 mx-auto lead">
+					<!-- Genre: <%= genre %> -->
+					Genre: <%= genre %>
+				</p>
+				<div class="mt-5">
+					<form action="/books" method="POST">
+						<input type="text" name="title" value="<%= title %>" hidden>
+						<input type="text" name="author" value="<%= author %>" hidden>
+						<input type="number" name="pages" value="<%= pages %>" hidden>
+						<input type="text" name="genre" value="<%= genre %>" hidden>
+						<button class="btn btn-lg btn-primary" type="submit">Add book</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%- include('../partials/footer') %>
