@@ -9,7 +9,8 @@ const bookCtrl = require('../controllers/books')
 router.post('/', bookCtrl.create)
 
 // // POST search
-router.post('/search', bookCtrl.showSearch)
+router.post('/search', bookCtrl.results)
+// router.post('/search', bookCtrl.showSearch)
 
 // DELETE
 router.delete('/:id', bookCtrl.delete)

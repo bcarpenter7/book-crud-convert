@@ -10,7 +10,8 @@ module.exports = {
     edit,
     update: updateBook,
 	search,
-	showSearch
+	showSearch,
+	results
 }
 
 
@@ -32,14 +33,77 @@ function search(req, res) {
 	res.render('books/search', context)
 }
 
+async function results(req, res){
+	try {
+		let jsonRes;
+		const title = req.body.title;
+		const author = req.body.author;
+		if(title && author){
+			jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}+inauthor:${author}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
+		} else if (title){
+			jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
+		} else if (author){
+			jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=inauthor:${author}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
+		} else {
+			res.render('error', {
+				error: "adf",
+				message: '',
+				title: 'error',
+				errorMsg: "Enter one of the search queries"
+			})
+		}
+
+		const data = await jsonRes.json();
+		const arr = []
+		data.items.forEach(e => {
+			const item = {
+			title: e.volumeInfo.title,
+			author: e.volumeInfo.authors[0],
+			dataImg: e.volumeInfo.imageLinks.thumbnail,
+			pages: e.volumeInfo.pageCount,
+			genre: e.volumeInfo.categories[0]
+			}
+			arr.push(item)
+		})
+
+		const context = {
+			books : arr,
+			title : "search results"
+		}
+
+		res.render('books/resultsIndex', context)
+	} catch (err) {
+		console.log(err);
+        res.render('error', {
+			error: '',
+			message: '',
+			title: 'error',
+			errorMsg: "not working"
+		});
+	}
+}
 
 async function showSearch(req, res){
 	try {
-		const oneBook = req.body.title;
-		const jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${oneBook}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
-		// const jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${oneBook.title}+inauthor:${author}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
+		let jsonRes;
+		const title = req.body.title;
+		const author = req.body.author;
+		if(title && author){
+			jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}+inauthor:${author}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
+		} else if (title){
+			jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
+		} else if (author){
+			jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=inauthor:${author}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
+		} else {
+			res.render('error', {
+				error: "adf",
+				message: '',
+				title: 'error',
+				errorMsg: "Enter one of the search queries"
+			})
+		}
+
 		const data = await jsonRes.json();
-		
 		const context = {
 			data: data.items[0],
 			title: data.items[0].volumeInfo.title,
