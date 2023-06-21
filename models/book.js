@@ -5,12 +5,10 @@ const Schema = mongoose.Schema;
 const bookSchema = new Schema({
     author: {
 		type: String,
-		required: false,
 		default: ""
 	},
     title: {
 		type: String,
-		required: false,
 		default: ""
 	},
     pages: {
@@ -18,14 +16,12 @@ const bookSchema = new Schema({
 		min: 1,
 		max: 99999,
 		default: 100,
-		required: false
 	},
     genre: {
 		type: String,
-		required: false,
 		default: ""
 	},
 	
-}, {timestamps: false});
+}, {timestamps: true});
 
 module.exports = mongoose.model('Book', bookSchema)
