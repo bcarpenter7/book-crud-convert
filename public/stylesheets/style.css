@@ -22,3 +22,35 @@ a {
 strong {
 	font-weight: 700;
 }
+
+.dropdown-menu {
+  min-width: 30vmin;
+}
+
+hr {
+  padding: 0;
+  margin: 0;
+}
+
+#dropdown {
+  text-decoration: none;
+  margin: 0;
+}
+
+#dropdown:hover {
+  cursor: pointer;
+  background-color: gray;
+}
+
+#dropdown > li {
+  padding: 1vmin 1vmin;
+  margin: 0;
+  font-size: 2vmin;
+  color: black;
+}
+
+#dropdown > li:hover {
+  cursor: pointer;
+  background-color: gray;
+  color: white;
+}

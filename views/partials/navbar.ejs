@@ -36,8 +36,13 @@
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Select Book</a>
 					<ul class="dropdown-menu">
-						<% navBooks.forEach(navBook => { %>
-							<li><a href="/books/<%= navBook.id %>"><%= navBook.title %></a></li>
+						<% navBooks.forEach((navBook, index) => { %>
+							<% if(index !== 0) { %>
+								<hr>
+							<% } %>
+							
+								<a id="dropdown" href="/books/<%= navBook.id %>"><li ><%= navBook.title %></li></a>
+							
 						<% }) %>
 					</ul>
 				</li>
