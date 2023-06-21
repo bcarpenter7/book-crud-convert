@@ -54,21 +54,28 @@ async function results(req, res){
 		}
 
 		const data = await jsonRes.json();
+		console.log(data.items[0])
 		const arr = []
 		data.items.forEach(e => {
 
-			let genre = (e.volumeInfo.categories ? e.volumeInfo.categories[0] : "book")
-			let dataImg = data.items[0].volumeInfo.imageLinks.thumbnail ? data.items[0].volumeInfo.imageLinks.thumbnail : "#"
+			let genre = e.volumeInfo.categories ? e.volumeInfo.categories[0] : "book"
+			let dataImg = e.volumeInfo.imageLinks ? e.volumeInfo.imageLinks.thumbnail : "#"
 			let author = e.volumeInfo.authors ? e.volumeInfo.authors[0] : "Author not available"
-			if(e.volumeInfo.authors.length > 1){
-				author = `${e.volumeInfo.authors[0]} & ${e.volumeInfo.authors[1]}`
-			} 
+			let description = e.volumeInfo.description ? e.volumeInfo.description : "No description available"
+			let price = e.saleInfo.listPrice ? e.saleInfo.listPrice.amount : "Price not available"
+			let link = e.saleInfo.buyLink ? e.saleInfo.buyLink : "Not available"
+			let pages = e.volumeInfo.pageCount ? e.volumeInfo.pageCount : "N/A"
+			if(e.volumeInfo.authors && e.volumeInfo.authors.length > 1) author = `${e.volumeInfo.authors[0]} & ${e.volumeInfo.authors[1]}`
+			
 			const item = {
 			title: e.volumeInfo.title,
-			author: author,
-			pages: e.volumeInfo.pageCount,
-			genre: genre,
-			dataImg: dataImg
+			author,
+			pages,
+			genre,
+			dataImg,
+			description,
+			price,
+			link
 			}
 			arr.push(item)
 		})
