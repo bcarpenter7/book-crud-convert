@@ -12,6 +12,9 @@ router.post('/', bookCtrl.create)
 router.post('/search', bookCtrl.results)
 // router.post('/search', bookCtrl.showSearch)
 
+// POST result show single page
+router.post('/search-show', bookCtrl.resultsShow)
+
 // DELETE
 router.delete('/:id', bookCtrl.delete)
 

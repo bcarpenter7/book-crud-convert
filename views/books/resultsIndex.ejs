@@ -27,7 +27,17 @@
 							Pages: <%= b.pages %>
 						</small>
 					</div>
-					
+					<form action="/books/search-show" method="POST">
+						<input type="text" name="title" value="<%= b.title %>" hidden>
+						<input type="text" name="author" value="<%= b.author %>" hidden>
+						<input type="number" name="pages" value="<%= b.pages %>" hidden>
+						<input type="text" name="genre" value="<%= b.genre %>" hidden>
+						<input type="text" name="dataImg" value="<%= b.dataImg %>" hidden>
+						<input type="text" name="description" value="<%= b.description %>" hidden>
+						<input type="text" name="price" value="<%= b.price %>" hidden>
+						<input type="text" name="link" value="<%= b.link %>" hidden>
+						<button class="btn btn-sm btn-secondary" type="submit">View book</button>
+					</form>
 					<form action="/books" method="POST">
 						<input type="text" name="title" value="<%= b.title %>" hidden>
 						<input type="text" name="author" value="<%= b.author %>" hidden>

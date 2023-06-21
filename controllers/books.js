@@ -10,7 +10,7 @@ module.exports = {
     edit,
     update: updateBook,
 	search,
-	showSearch,
+	resultsShow,
 	results
 }
 
@@ -96,6 +96,27 @@ async function results(req, res){
 		});
 	}
 }
+
+async function resultsShow(req, res){
+	try {
+		const context = {
+			book: req.body,
+			title: req.body.title
+		}
+		res.render('books/results', context)
+	} catch (err) {
+		console.log(err);
+        res.render('error', {
+			error: '',
+			message: '',
+			title: 'error',
+			errorMsg: "not working"
+		});
+	}
+}
+
+
+
 
 async function showSearch(req, res){
 	try {
