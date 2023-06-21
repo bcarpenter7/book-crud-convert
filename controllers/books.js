@@ -56,12 +56,19 @@ async function results(req, res){
 		const data = await jsonRes.json();
 		const arr = []
 		data.items.forEach(e => {
+
+			let genre = (e.volumeInfo.categories ? e.volumeInfo.categories[0] : "book")
+			let dataImg = data.items[0].volumeInfo.imageLinks.thumbnail ? data.items[0].volumeInfo.imageLinks.thumbnail : "#"
+			let author = e.volumeInfo.authors ? e.volumeInfo.authors[0] : "Author not available"
+			if(e.volumeInfo.authors.length > 1){
+				author = `${e.volumeInfo.authors[0]} & ${e.volumeInfo.authors[1]}`
+			} 
 			const item = {
 			title: e.volumeInfo.title,
-			author: e.volumeInfo.authors[0],
-			dataImg: e.volumeInfo.imageLinks.thumbnail,
+			author: author,
 			pages: e.volumeInfo.pageCount,
-			genre: e.volumeInfo.categories[0]
+			genre: genre,
+			dataImg: dataImg
 			}
 			arr.push(item)
 		})
