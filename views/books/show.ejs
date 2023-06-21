@@ -6,14 +6,21 @@
 				<h1 class="text-body-emphasis">
 					<%= book.title %>
 				</h1>
+				<img width="150vmin" height="200vmin" src="<%= dataImg %>">
 				<p class="col-lg-8 mx-auto lead">
 					Author: <%= book.author %>
 				</p>
 				<p class="col-lg-8 mx-auto lead">
+					<% if(pages){ %>
+					Pages: <%= pages %>
+
+					<% } else { %>
 					Pages: <%= book.pages %>
+					<% } %>
 				</p>
 				<p class="col-lg-8 mx-auto lead">
-					Genre: <%= book.genre %>
+					<!-- Genre: <%= book.genre %> -->
+					Genre: <%= genre %>
 				</p>
 				<div class="mt-5">
 					<a href="/books/<%= book.id %>/edit"><button class="btn btn-lg btn-primary" type="button">Edit</button></a>

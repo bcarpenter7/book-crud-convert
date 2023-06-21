@@ -25,16 +25,25 @@ async function index(req, res){
 async function show(req, res){
 	try {
 		const oneBook = await Book.findById(req.params.id)
+		console.log(oneBook.title)
+		const jsonRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${oneBook.title}+inauthor:${oneBook.author}&api=AIzaSyA712kv4XX64tekfGyNf4uWoCoIq4wxfVc`)
+		const data = await jsonRes.json();
+		
 		const context = {
 			book: oneBook,
-			title: oneBook.title
+			title: oneBook.title,
+			data: data.items[0],
+			dataImg: data.items[0].volumeInfo.imageLinks.thumbnail,
+			pages: data.items[0].volumeInfo.pageCount,
+			genre: data.items[0].volumeInfo.categories[0]
 		}
+		console.log(data.items[0], data.items[0].pageCount)
 		res.render('books/show', context)
 	} catch (err) {
 		console.log(err);
         res.render('error', {
 			title: 'error',
-			errorMsg: err.message
+			errorMsg: "not working"
 		});
 	}
 }
@@ -112,3 +121,4 @@ async function deleteBook(req, res){
 		})
     }
 }
+
