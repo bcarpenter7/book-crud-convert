@@ -33,6 +33,16 @@
 					<a class="nav-link <%= title === 'Search' ? 'active' : '' %>" href="/books/search">Search</a>
 				</li>
 
+				<li class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Select Book</a>
+					<ul class="dropdown-menu">
+						<% navBooks.forEach(navBook => { %>
+							<li><a href="/books/<%= navBook.id %>"><%= navBook.title %></a></li>
+						<% }) %>
+					</ul>
+				</li>
+
+
 				<li class="nav-item">
 					<a class="nav-link <%= title === 'Books' ? 'active' : '' %>" href="/books">All Books</a>
 				</li>

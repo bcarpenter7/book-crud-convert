@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var Book = require('./models/book')
 
 require('dotenv').config();
 require('./config/database')
@@ -17,6 +18,11 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(async function(req,res,next){
+	res.locals.navBooks = await Book.find({})
+	next();
+})
 
 app.use(logger('dev'));
 app.use(express.json());
